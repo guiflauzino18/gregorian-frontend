@@ -1,6 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+main {
+    padding-inline: 3rem;
+    padding-block: 1rem;
+}
+
 * {
     font-family: 'Roboto', sans-serif;
+    color: var(--primary-gray)
+}
+
+html, body { height: 100%; }
+body { margin: 0;}
+
+:root {
+    --navbar-height: 50px;
+    --sidebar-width: 200px;
+    --primary-green: #05935A;
+    --secondary-green: #33BD86;
+    --primary-gray: #333333;
+    --secondary-gray: #D9D9D9;
+    --light-gray: #F3F3F3;
+    --text-white: #fff;
+    --card-height: 15rem;
+    --card-width: 15rem;
 }

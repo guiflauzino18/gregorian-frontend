@@ -1,0 +1,29 @@
+ <div class="grid grid-rows-[auto_1fr_auto] h-full"
+        [class]="sidebar ? 'grid-cols-[auto_1fr]' : 'grid-cols-[0_1fr]'"
+        >
+
+    <header class="col-span-2">
+        <app-navbar [user]="user" (logout)="logout($event)"/>
+    </header>
+
+    <aside class="row-span-2">
+        <app-sidebar (logout)="logout($event)" (toggle)="toggleSidebar()" [open]="sidebar"/>
+    </aside>
+
+    <main class="flex flex-col gap-5">
+        <div>
+            <app-page-header [props]="pagesHeaderProps" />
+        </div>
+
+        <div class="flex justify-evenly flex-wrap gap-10">
+
+            @for( item of cardProps; track item.link){
+                <app-card [props]="item"/>
+            }
+        </div>
+    </main>
+
+    <footer class="col-span-2 text-center w-full">
+        Gregorian 2025
+    </footer>
+</div>

@@ -1,0 +1,29 @@
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  background: var(--primary-gray);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  color: var(--text-white);
+  transform: translateX(0%);
+  transition: .5s;
+}
+
+.closed {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--primary-gray);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  color: var(--text-white);
+  transform: translateX(-80%);
+  transition: .5s;
+}
+
+* {
+  color: var(--text-white)
+}

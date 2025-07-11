@@ -43,7 +43,7 @@ export class Login implements OnInit {
       }
 
       this.authService.login(loginRequest).subscribe({
-        next: (r) => {
+        next: async (r) => {
           this.authService.setToken(r.token, r.id)
           this.router.navigate([''])
         },

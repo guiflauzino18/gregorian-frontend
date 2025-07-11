@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { Navbar } from "./components/navbar/navbar";
+import { UserDTO } from '../interfaces/user';
+import { Index } from './services';
+import { AuthService } from './services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +11,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App{
+
   protected title = 'gregorian-frontend';
+
+
 }

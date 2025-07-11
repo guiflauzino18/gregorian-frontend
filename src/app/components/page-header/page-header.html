@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-2">
+    <div class="font-medium text-2xl">
+        <h1>{{props()?.title ?? 'Página Inicial'}}</h1>
+    </div>
+    <div>
+        <ul class="flex gap-2">
+            @for(item of props()?.page; track item.link){
+                <li class="rounded-xl bg-gray-200 px-1.5">
+
+                    <a routerLink="/" >
+                        <i [class]="item.icon"></i>
+                        {{item.nome}}
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="bg-linear-to-r h-0.5 from-gray-300">
+        
+    </div>
+</div>

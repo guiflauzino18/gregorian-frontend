@@ -1,0 +1,42 @@
+<aside [class]="open() ? 'sidebar': 'closed'">
+    <div class="flex flex-col gap-2">
+        
+        <div class="flex justify-between">
+            <div class="flex-1">
+                <h2 class="font-bold">GUILHERME</h2>
+                <h3 class="font-thin">FLAUZINO</h3>
+            </div>
+            
+            <button class="flex text-3xl hover:cursor-pointer" (click)="toggleClick()">
+                <i class='bx bx-menu'></i>
+            </button>
+        </div>
+        <div class="text-xs">
+            <h2 class="font-bold">EMPRESA</h2>
+            <h3 class="font-thin">Grupo</h3>
+        </div>
+        
+    </div>
+
+    <div id="sidebar-content" class="flex-1">
+        @if (open()) {
+                CONTENT
+            }
+    </div>
+
+    <div class="mb-[var(--navbar-height)]">
+
+        <div class="flex justify-start items-center gap-3">
+
+            <div class="flex flex-col">
+                <i class='bx bxs-user-circle text-2xl' ></i>
+            </div>
+
+            <a href="#" (click)="onClickLogout()">
+                <div class="flex flex-col items-center hover:text-red-400">
+                    <i class='bx bxs-exit text-2xl' ></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</aside>

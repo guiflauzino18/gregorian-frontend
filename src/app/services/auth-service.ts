@@ -48,7 +48,8 @@ export class AuthService {
   }
 
   logout(): void{
-    document.cookie = 'jwt=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    document.cookie = 'id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
     this.router.navigate(['/login']);
   }
 

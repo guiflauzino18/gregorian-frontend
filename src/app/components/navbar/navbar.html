@@ -1,0 +1,35 @@
+<nav class="navbar">
+
+    <div class="flex justify-between items-center px-2 text-white h-full">
+        <!-- //logo -->
+        <div class="font-bold text-xl">
+            <a routerLink="/">
+                <h1>GREGORIAN</h1>
+            </a>
+        </div>
+        <!-- //search -->
+         <div class="flex justify-between items-center rounded-xl border p-1 w-60">
+
+            <input type="text" class="text-[.7rem] w-full" placeholder="Comece a digitar para pesquisar">
+            <i class='bx bx-search text-xl'></i>
+
+         </div>
+        
+        <!-- //user -->
+        <!-- //sair -->
+         <div class="flex items-center h-full gap-3">
+
+            <div class="flex flex-col items-center">
+                <i class='bx bxs-user-circle text-2xl' ></i>
+                <h3 class="text-[.7rem]">{{user()?.nome}}</h3>
+            </div>
+
+            <a href="#" (click)="onClick()">
+                <div class="flex flex-col items-center hover:text-red-400">
+                    <i class='bx bxs-exit text-2xl' ></i>
+                    <h3 class="text-[.7rem]">Sair</h3>
+                </div>
+            </a>
+         </div>
+    </div>
+</nav>
