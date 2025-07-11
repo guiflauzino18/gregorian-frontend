@@ -1,0 +1,65 @@
+<div class="w-full h-[100vh] flex bg-linear-to-r from-[#33BD86] from-50% to-white">
+
+    <div class="bg-white w-[50%] rounded-r-4xl flex gap-2 flex-col justify-center items-center border">
+
+        <div class="bg-gray-300 shadow-xl/80 shadow-gray-500 w-110  rounded-2xl p-7 gap-2 flex flex-col">
+            <h1 class="text-2xl font-black">Login</h1>
+            <div class="">
+                <form class="h-full flex flex-col gap-5 justify-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="flex flex-col">
+                        <label for="login">Login</label>
+                        <input id="login" id="login" type="text" class="bg-white rounded-md h-9" formControlName="login" required=""/>
+                        @if(login?.invalid){
+                            <div class="text-red-400">
+                                @if(login?.hasError('required')){
+                                    <span>Login é obrigatório!</span>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" class="bg-white rounded-md h-9" formControlName="senha" required=""/>
+                            @if(senha?.invalid){
+                                <div class="text-red-400">
+                                    @if(senha?.hasError('required')){
+                                        <span>Senha é obrigatório!</span>
+                                    }
+                                    @if(senha?.hasError('minlength')){
+                                        <span>Senha deve ter pelo menos 6 caracteres</span>
+                                    }
+                                </div>
+                            }
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <input type="submit" class="hover:cursor-pointer border rounded-lg px-4 py-1">
+                        <a href="#" class="text-blue-400 text-center hover:underline"><i class='bx bxs-cog'></i> Recuperar senha</a>
+                    </div>
+                    @if(responseError){
+                        <div class="self-center text-red-400">
+                            Usuário ou senha inválidos
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[50%] flex flex-col justify-between items-start px-30">
+        <div class="text-7xl font-black flex flex-col justify-end w-full h-full text-gray-800 text-shadow-lg text-shadow-gray-700/60">
+
+            Gregorian<br>
+            Gestão de<br>
+            Atendimentos
+
+        </div>
+        <div class="h-full w-full flex flex-col justify-center items-start">
+            <div class="flex flex-col gap-2 text-primary">
+                <span class="flex items-center gap-1"><i class='bx bxs-phone text-2xl'></i> (35) 9 9921-9099</span>
+                <span class="flex items-center gap-1"><i class='bx bx-globe text-2xl'></i> www.gregorian.com</span>
+                <span class="flex items-center gap-1"><i class='bx bxs-envelope text-2xl' ></i> contato&#64;gregorian.com</span>
+            </div>
+
+        </div>
+    </div>
+</div>
