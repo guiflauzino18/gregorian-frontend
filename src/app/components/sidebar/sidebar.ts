@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { showConfirm } from '../../../utils/popup';
 
 @Component({
   selector: 'app-sidebar',

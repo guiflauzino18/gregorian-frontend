@@ -1,4 +1,4 @@
- <div class="grid grid-rows-[auto_1fr_auto] h-full"
+ <!-- <div class="grid grid-rows-[auto_1fr_auto] h-full"
         [class]="sidebar ? 'grid-cols-[auto_1fr]' : 'grid-cols-[0_1fr]'"
         >
 
@@ -26,4 +26,17 @@
     <footer class="col-span-2 text-center w-full">
         Gregorian 2025
     </footer>
-</div>
+</div> -->
+
+<main class="flex flex-col gap-5">
+        <div>
+            <app-page-header [props]="pagesHeaderProps" />
+        </div>
+
+        <div class="flex justify-evenly flex-wrap gap-10">
+
+            @for( item of cardProps; track item.link){
+                <app-card [props]="item"/>
+            }
+        </div>
+</main>

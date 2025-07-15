@@ -7,6 +7,28 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<div class="flex flex-col justify-between h-full">
 
-<router-outlet />
+    @if (isLogged){
+        
+        <header class="fixed">
+            <app-navbar [user]="user" (logout)="logout()"/>
+        </header>
+        
+        <aside class="fixed">
+            <app-sidebar (logout)="logout()" (toggle)="toggleSidebar()" [open]="sidebar"/>
+        </aside>
+    }
+    
+    <div [classList]="isLogged ? 'mt-[var(--navbar-height)]' : ''">
+        <router-outlet />
+    </div>
+    
+    @if(isLogged){
 
+        <footer class="text-center w-full">
+            Gregorian 2025
+        </footer>
+    }
+    
+</div>

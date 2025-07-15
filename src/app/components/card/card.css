@@ -2,3 +2,11 @@
     width: var(--card-width);
     height: var(--card-height);
 }
+
+* {
+    color: var(--primary-gray);
+}
+
+.card i {
+    color: var(--primary-green);
+}

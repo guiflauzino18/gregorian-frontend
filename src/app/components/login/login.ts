@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService, LoginRequest } from '../../services/auth-service';
 import { Router } from '@angular/router';
+import { reload } from '../../../utils/loader';
 
 @Component({
   selector: 'app-login',
@@ -46,6 +47,7 @@ export class Login implements OnInit {
         next: async (r) => {
           this.authService.setToken(r.token, r.id)
           this.router.navigate([''])
+          reload()
         },
         error: (e) => {
           this.responseError = e;

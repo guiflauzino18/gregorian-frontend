@@ -2,8 +2,5 @@
     background: var(--primary-gray);
     height: var(--navbar-height);
     width: 100%;
-}
-
-.navbar * {
-    color: var(--text-white);
+    position: fixed;
 }

@@ -1,8 +1,8 @@
 <nav class="navbar">
 
-    <div class="flex justify-between items-center px-2 text-white h-full">
+    <div class="flex justify-between items-center px-3 text-white h-full">
         <!-- //logo -->
-        <div class="font-bold text-xl">
+        <div class="font-bold text-xl ps-10">
             <a routerLink="/">
                 <h1>GREGORIAN</h1>
             </a>
@@ -24,7 +24,7 @@
                 <h3 class="text-[.7rem]">{{user()?.nome}}</h3>
             </div>
 
-            <a href="#" (click)="onClick()">
+            <a (click)="onClick()" class="cursor-pointer">
                 <div class="flex flex-col items-center hover:text-red-400">
                     <i class='bx bxs-exit text-2xl' ></i>
                     <h3 class="text-[.7rem]">Sair</h3>

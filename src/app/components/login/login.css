@@ -1,0 +1,7 @@
+* {
+    color: var(--primary-gray);
+}
+
+.login-invalid *{
+    color: var(--text-error)
+}

@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { reload } from '../../utils/loader';
 
 //Dados enviados para autenticar
 export type LoginRequest = {
@@ -50,7 +51,7 @@ export class AuthService {
   logout(): void{
     document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
     document.cookie = 'id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-    this.router.navigate(['/login']);
+    reload();
   }
 
   isLogged(): boolean {

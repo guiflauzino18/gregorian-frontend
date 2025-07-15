@@ -8,7 +8,7 @@ main {
 
 * {
     font-family: 'Roboto', sans-serif;
-    color: var(--primary-gray)
+    /* color: var(--primary-gray) */
 }
 
 html, body { height: 100%; }
@@ -25,4 +25,5 @@ body { margin: 0;}
     --text-white: #fff;
     --card-height: 15rem;
     --card-width: 15rem;
+    --text-error: #D74139;
 }

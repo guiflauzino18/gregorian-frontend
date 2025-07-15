@@ -10,7 +10,7 @@
                         <label for="login">Login</label>
                         <input id="login" id="login" type="text" class="bg-white rounded-md h-9" formControlName="login" required=""/>
                         @if(login?.invalid){
-                            <div class="text-red-400">
+                            <div class="login-invalid">
                                 @if(login?.hasError('required')){
                                     <span>Login é obrigatório!</span>
                                 }
@@ -21,7 +21,7 @@
                         <label for="senha">Senha</label>
                         <input id="senha" type="password" class="bg-white rounded-md h-9" formControlName="senha" required=""/>
                             @if(senha?.invalid){
-                                <div class="text-red-400">
+                                <div class="login-invalid">
                                     @if(senha?.hasError('required')){
                                         <span>Senha é obrigatório!</span>
                                     }

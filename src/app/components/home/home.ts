@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Sidebar } from "../sidebar/sidebar";
 import { PageHeader, pageHeaderProps } from "../page-header/page-header";
 import { Card, cardProps } from "../card/card";
+import { showLoading, showConfirm, showLoadingError, showLoadingSuccess, showToast, hideLoading } from '../../../utils/popup';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,10 @@ import { Card, cardProps } from "../card/card";
 })
 export class Home implements OnInit {
   ngOnInit(): void {
+
+    showLoading()
     this.loadIndex()
+    hideLoading()
   }
 
   protected user: UserDTO | undefined;
@@ -38,23 +42,113 @@ export class Home implements OnInit {
       icone: 'bx bxs-user-account',
       link: '/atendimento'
     },
-        {
+    {
       titulo: 'Agendamento',
-      desc: 'Gerencie agendamento, cadastre e .',
+      desc: 'Gerencie agendamentos .',
       icone: 'bx bxs-calendar',
       link: '/agendamento'
-    }
+    },
+    {
+      titulo: 'Faturamento',
+      desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
+      icone: 'bx bxs-badge-dollar',
+      link: '/faturamento'
+    },
+    {
+      titulo: 'Configuração',
+      desc: 'Defina configurações para o funcionamento do sistema',
+      icone: 'bx bxs-cog',
+      link: '/configuracao'
+    },
+
+
+    // {
+    //   titulo: 'Atendimento',
+    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
+    //   icone: 'bx bxs-user-account',
+    //   link: '/atendimento'
+    // },
+    // {
+    //   titulo: 'Agendamento',
+    //   desc: 'Gerencie agendamentos .',
+    //   icone: 'bx bxs-calendar',
+    //   link: '/agendamento'
+    // },
+    // {
+    //   titulo: 'Faturamento',
+    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
+    //   icone: 'bx bxs-badge-dollar',
+    //   link: '/faturamento'
+    // },
+    // {
+    //   titulo: 'Configuração',
+    //   desc: 'Defina configurações para o funcionamento do sistema',
+    //   icone: 'bx bxs-cog',
+    //   link: '/configuracao'
+    // },
+    // {
+    //   titulo: 'Atendimento',
+    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
+    //   icone: 'bx bxs-user-account',
+    //   link: '/atendimento'
+    // },
+    // {
+    //   titulo: 'Agendamento',
+    //   desc: 'Gerencie agendamentos .',
+    //   icone: 'bx bxs-calendar',
+    //   link: '/agendamento'
+    // },
+    // {
+    //   titulo: 'Faturamento',
+    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
+    //   icone: 'bx bxs-badge-dollar',
+    //   link: '/faturamento'
+    // },
+    // {
+    //   titulo: 'Configuração',
+    //   desc: 'Defina configurações para o funcionamento do sistema',
+    //   icone: 'bx bxs-cog',
+    //   link: '/configuracao'
+    // },
+    // {
+    //   titulo: 'Atendimento',
+    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
+    //   icone: 'bx bxs-user-account',
+    //   link: '/atendimento'
+    // },
+    // {
+    //   titulo: 'Agendamento',
+    //   desc: 'Gerencie agendamentos .',
+    //   icone: 'bx bxs-calendar',
+    //   link: '/agendamento'
+    // },
+    // {
+    //   titulo: 'Faturamento',
+    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
+    //   icone: 'bx bxs-badge-dollar',
+    //   link: '/faturamento'
+    // },
+    // {
+    //   titulo: 'Configuração',
+    //   desc: 'Defina configurações para o funcionamento do sistema',
+    //   icone: 'bx bxs-cog',
+    //   link: '/configuracao'
+    // },
   ]
   
-
   logout(p: boolean){
     if (p){
-      console.log(p)
-      this.authService.logout()
+      showConfirm({
+        title: 'Sair?',
+        icon: 'warning',
+        callback: () => this.authService.logout()
+      })
+      //this.authService.logout()
     }
   }
 
   loadIndex(){
+    
       this.indexService.getIndex().subscribe({
       next: (res) => {
         this.user = res;
@@ -65,10 +159,4 @@ export class Home implements OnInit {
       }
     })
   }
-
-  toggleSidebar(){
-    
-    this.sidebar = !this.sidebar;
-  }
-
 }
