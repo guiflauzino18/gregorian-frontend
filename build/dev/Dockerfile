@@ -10,5 +10,5 @@ RUN npm run build --prod
 # Etapa 2: imagem final com nginx
 FROM nginx:alpine
 
-COPY --from=build /app/dist/gregorian-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/gregorian-frontend/browser /usr/share/nginx/html
 COPY build/dev/nginx.conf /etc/nginx/conf.d/default.conf
