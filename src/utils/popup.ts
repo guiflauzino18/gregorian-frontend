@@ -42,7 +42,7 @@ export function showToast(props: toastProps){
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
-        didOpen: (toast) => {
+        didOpen: function (toast) {
             toast.onmouseenter = Swal.stopTimer;
             toast.onmouseleave = Swal.resumeTimer;
         }
