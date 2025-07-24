@@ -69,20 +69,20 @@ export function hideLoading(){
     Swal.close()
 }
 
-export function showLoadingError(text: string){
+export function showLoadingError(text: string, postSwalCallback?: () => void){
     if (Swal.isLoading()) Swal.hideLoading();
     Swal.fire({
         icon: 'error',
         title: 'Erro',
         text: text
-    })
+    }).then(() => postSwalCallback? postSwalCallback() : null)
 }
 
-export function showLoadingSuccess(text: string){
+export function showLoadingSuccess(text: string, postSwalCallback?: () => void){
     if (Swal.isLoading()) Swal.hideLoading();
     Swal.fire({
         icon: 'success',
         title: 'Sucesso',
         text: text
-    })
+    }).then(() => postSwalCallback? postSwalCallback() : null)
 }

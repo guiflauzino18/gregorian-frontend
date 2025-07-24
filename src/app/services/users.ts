@@ -15,9 +15,14 @@ export class UsersServices {
   
   private http = inject(HttpClient)
 
+  getUserById(id: number){
+    const params = new HttpParams().set('id', id)
+    const url = `${this.API_URL}/admin/user/byid`
+    return this.http.get<UserDTO>(url, {params})
+  }
+
   getAllUsers(pageable?: Pageable<UserDTO>){
 
-    console.log(pageable)
     // Para paginação
     let params = pageable? new HttpParams()
       .set('page', pageable.number)
@@ -36,5 +41,11 @@ export class UsersServices {
   createUser(user: UserDTO){
     const url = `${this.API_URL}/admin/user/create`
     return this.http.post(url, user)
+  }
+
+  editUser(user: UserDTO){
+    console.log(user)
+    const url = `${this.API_URL}/admin/user/edit`
+    return this.http.put(url, user)
   }
 }

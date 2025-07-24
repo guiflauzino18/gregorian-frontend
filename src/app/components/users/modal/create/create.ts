@@ -12,12 +12,12 @@ import { showLoading, showLoadingError, showLoadingSuccess } from '../../../../.
 
 
 @Component({
-  selector: 'app-create',
-  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, MatFormFieldModule, MatCheckbox],
+  selector: 'app-create-user',
+  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogContent, MatButtonModule, MatFormFieldModule],
   templateUrl: './create.html',
   styleUrl: './create.css'
 })
-export class CreateNewUser {
+export class CreateUser {
 
   userService = inject(UsersServices)
 

@@ -9,14 +9,10 @@ import { Pageable } from '../../../interfaces/pageable';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { CreateNewUser } from './modal/create/create';
+import {MatDialog} from '@angular/material/dialog';
+import { CreateUser } from './modal/create/create';
+import { EditUser } from './modal/edit/edit';
+import { hideLoading, showLoading, showLoadingError } from '../../../utils/popup';
 
 @Component({
   selector: 'app-users',
@@ -35,6 +31,7 @@ export class Users implements AfterViewInit{
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator = new MatPaginator();
   @ViewChild(MatSort) sort: MatSort = new MatSort;
   readonly modalNewUser = inject(MatDialog);
+  readonly modalEditUser = inject(MatDialog);
 
 
   constructor(){
@@ -77,7 +74,7 @@ export class Users implements AfterViewInit{
   }
 
   openModalNewUser(){
-    this.modalNewUser.open(CreateNewUser, {
+    this.modalNewUser.open(CreateUser, {
     maxHeight: '80vh',  // ou 'none' para remover completamente o limite
     maxWidth: '80vw',   // ou 'none'
     height: 'auto',
@@ -85,9 +82,30 @@ export class Users implements AfterViewInit{
     });
   }
 
+  openModalEditUser(user: UserDTO){
+    this.modalEditUser.open(EditUser, {
+    maxHeight: '80vh',  // ou 'none' para remover completamente o limite
+    maxWidth: '80vw',   // ou 'none'
+    height: 'auto',
+    width: 'auto',
+    data: user,
+    });
+  }
+
 
   edit(userId: number){
-    alert(userId)
+    showLoading()
+
+    this.service.getUserById(userId).subscribe({
+      next: (resp) => {
+        this.openModalEditUser(resp)
+        hideLoading()
+      },
+      error: (err) => {
+        console.error("Erro ao buscar dados do usuário: "+err)
+        showLoadingError("Erro ao buscar dados do usuário")
+      }
+    })
   }
 
 }
