@@ -1,0 +1,162 @@
+<div class="w-full h-full flex flex-col justify-between">
+    <h2 class="text-[var(--primary-gray)] px-5 py-2 text-xl">Cadastro de Usuário</h2>
+    <mat-dialog-content class="h-full w-full">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full h-full">
+
+            <div class="flex gap-10 w-full justify-between ">
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="nome" class="relative top-3 -right-2 bg-white w-fit px-1">Nome</label>
+                    <input id="nome" id="nome" type="text" class="input-modal" formControlName="nome" required=""/>
+                    @if(nome?.invalid){
+                        <div class="form-invalid">
+                            @if(nome?.hasError('required')){
+                                <span>Nome é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="sobrenome" class="relative top-3 -right-2 bg-white w-fit px-1">Sobrenome</label>
+                    <input id="sobrenome" id="sobrenome" type="text" class="input-modal" formControlName="sobrenome" required=""/>
+                    @if(nome?.invalid){
+                        <div class="form-invalid">
+                            @if(sobrenome?.hasError('required')){
+                                <span>Sobrenome é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="flex gap-10 w-full justify-between ">
+                <div class="flex flex-col w-[100vw]">
+                    <label for="nascimento" class="relative top-3 -right-2 bg-white w-fit px-1">Nascimento</label>
+                    <input id="nascimento" id="nascimento" type="date" class="input-modal" formControlName="nascimento" required=""/>
+                    @if(nascimento?.invalid){
+                        <div class="form-invalid">
+                            @if(nascimento?.hasError('required')){
+                                <span>nascimento é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="telefone" class="relative top-3 -right-2 bg-white w-fit px-1">Telefone</label>
+                    <input id="telefone" id="telefone" type="text" class="input-modal" formControlName="telefone" required=""/>
+                    @if(telefone?.invalid){
+                        <div class="form-invalid">
+                            @if(telefone?.hasError('required')){
+                                <span>telefone é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="email" class="relative top-3 -right-2 bg-white w-fit px-1">E-mail</label>
+                    <input id="email" id="email" type="email" class="input-modal" formControlName="email" required=""/>
+                    @if(email?.invalid){
+                        <div class="form-invalid">
+                            @if(email?.hasError('required')){
+                                <span>email é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            <div class="flex gap-10 w-full justify-between ">
+                <div class="flex flex-col w-[100vw]">
+                    <label for="login" class="relative top-3 -right-2 bg-white w-fit px-1">Login</label>
+                    <input id="login" id="login" type="text" class="input-modal" formControlName="login" required=""/>
+                    @if(login?.invalid){
+                        <div class="form-invalid">
+                            @if(login?.hasError('required')){
+                                <span>login é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="senha" class="relative top-3 -right-2 bg-white w-fit px-1">Senha</label>
+                    <input id="senha" id="senha" type="password" class="input-modal" formControlName="senha" required=""/>
+                    @if(senha?.invalid){
+                        <div class="form-invalid">
+                            @if(senha?.hasError('required')){
+                                <span>senha é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                    <div class="flex flex-row-reverse gap-2 justify-end">
+                        <label for="changePasswordOnNextLogon">Alterar senha no próximo Login</label>
+                        <input id="changePasswordOnNextLogon" type="checkbox" formControlName="alteraNextLogon">
+                    </div>
+                </div>
+                    
+                <div class="flex flex-col w-[100vw]">
+                    <label for="role" class="relative top-3 -right-2 bg-white w-fit px-1">Grupo</label>
+                    <select name="role" id="role" class="input-modal" formControlName="role" required="">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="FATURAMENTO">FATURAMENTO</option>
+                        <option value="AGENDAMENTO">AGENDAMENTO</option>
+                        <option value="ATENDIMENTO">ATENDIMENTO</option>
+                        <option value="PROFISSIONAL">PROFISSIONAL</option>
+                    </select>
+                        @if(role?.invalid){
+                        <div class="form-invalid">
+                            @if(role?.hasError('required')){
+                                <span>Grupo é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="flex gap-10 w-full justify-between ">
+                <div class="flex flex-col w-[100vw]">
+                    <label for="endereco" class="relative top-3 -right-2 bg-white w-fit px-1">Endereço</label>
+                    <input id="endereco" id="endereco" type="text" class="input-modal" formControlName="endereco" required=""/>
+                    @if(endereco?.invalid){
+                        <div class="form-invalid">
+                            @if(endereco?.hasError('required')){
+                                <span>endereco é obrigatório!</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="flex gap-3 justify-end">
+               <input type="submit" value="Salvar" class="cursor-pointer">
+               <button>Cancelar</button>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <!-- <mat-dialog-actions>
+        <button matButton mat-dialog-close>Close</button>
+        <button>salvar</button>
+    </mat-dialog-actions> -->
+</div>
+    
+
+<!-- 
+    id?: number,
+    nome: string,
+    sobrenome: string,
+    nascimento: string,
+    telefone: string,
+    email: string,
+    login: string,
+    senha
+    role: string,
+    status: number
+    alteraNextLogon: boolean
+    dataRegistro: string
+    empresaNome: string
+    endereco: string,
+-->

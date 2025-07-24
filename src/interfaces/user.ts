@@ -7,9 +7,10 @@ export interface UserDTO {
     email: string,
     endereco: string,
     login: string,
+    senha?: string,
     role: string,
-    status: number
-    alteraNextLogon: boolean
-    dataRegistro: string
-    empresaNome: string
+    status?: number
+    alteraNextLogon?: boolean
+    dataRegistro?: string
+    empresaNome?: string
 }

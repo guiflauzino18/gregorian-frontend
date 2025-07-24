@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { PageHeader, pageHeaderProps } from "../page-header/page-header";
 import { tabProps, Tabs } from "../../widget/tabs/tabs";
-import { Table } from '../../widget/table/table';
 import { Card } from '../card/card';
 import { Users } from '../users/users';
 

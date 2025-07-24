@@ -5,9 +5,10 @@ export interface Pageable<T>{
     totalElements: number,
     first: true,
     size: number,
+    number: number,
     numberOfElements: number,
     empty: boolean,
-    sort: {sorted: boolean, empty: boolean, unsorted: boolean},
+    sort: {sorted: boolean, empty: boolean, unsorted: boolean, sortField: string, sortDirection: string},
 }
 
 /*

@@ -26,3 +26,53 @@ body { margin: 0;}
     --card-width: 15rem;
     --text-error: #D74139;
 }
+
+.table-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button{
+    padding-inline: 1.5rem;
+    padding-block: .5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.button:hover{
+    opacity: .9;
+}
+
+.button-add{
+    background-color: var(--primary-green);
+    color: white;
+}
+
+
+.form-invalid {
+    color: var(--text-error)
+}
+
+
+.input-modal {
+    background-color: white;
+    border-radius: .375rem;
+    border: .5px solid gray;
+    padding: 1rem;
+}
+
+.input-modal:focus{
+    outline: none;
+    border: 2px solid var(--primary-green);
+}
+
+
+/* //bg-white rounded-md  border p-4 focus:outline-none focus:border-[var(--primary-green) */
