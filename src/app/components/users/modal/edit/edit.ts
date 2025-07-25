@@ -1,5 +1,5 @@
 import { Component, inject, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogContent } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { UserDTO } from '../../../../../interfaces/user';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,12 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UsersServices } from '../../../../services/users';
 import { showLoading, showLoadingError, showLoadingSuccess } from '../../../../../utils/popup';
-import Swal from 'sweetalert2';
 import { reload } from '../../../../../utils/loader';
 
 @Component({
   selector: 'app-edit-user',
-  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogContent, MatButtonModule, MatFormFieldModule],
+  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogContent, MatButtonModule, MatFormFieldModule, MatDialogActions],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })
@@ -23,7 +22,9 @@ export class EditUser {
   editForm: FormGroup;
   service = inject(UsersServices)
 
-  constructor(@Inject(MAT_DIALOG_DATA) public user: UserDTO) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public user: UserDTO, 
+    private dialogRef: MatDialogRef<EditUser>) {
 
     this.editForm = new FormGroup({
       id: new FormControl(user.id, Validators.required),
@@ -37,6 +38,11 @@ export class EditUser {
       status: new FormControl(user.status, [Validators.required]),
       alteraNextLogon: new FormControl(user.alteraNextLogon ?? false)
     });
+  }
+
+
+  onClose(){
+    this.dialogRef.close()
   }
 
   onSubmit(){

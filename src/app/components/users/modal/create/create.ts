@@ -1,6 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { UsersServices } from '../../../../services/users';
 import { UserDTO } from '../../../../../interfaces/user';
 import { showLoading, showLoadingError, showLoadingSuccess } from '../../../../../utils/popup';
+import { reload } from '../../../../../utils/loader';
 
 
 @Component({
@@ -19,8 +20,12 @@ import { showLoading, showLoadingError, showLoadingSuccess } from '../../../../.
 })
 export class CreateUser {
 
-  userService = inject(UsersServices)
+  constructor(
+    private dialogRef: MatDialogRef<CreateUser>
+  
+  ){}
 
+  userService = inject(UsersServices)
   createForm = new FormGroup({
 
     nome: new FormControl('', Validators.required),
@@ -34,6 +39,49 @@ export class CreateUser {
     role: new FormControl('', [Validators.required]),
     alteraNextLogon: new FormControl(false),
   })
+
+
+  onSubmit(){
+
+    if (this.createForm.valid){
+
+      showLoading()
+
+      const user: UserDTO = {
+
+        nome: this.nome?.value ?? '',
+        sobrenome: this.sobrenome?.value ?? '',
+        nascimento: this.nascimento?.value ?? '',
+        telefone: this.telefone?.value ?? '',
+        email: this.email?.value ?? '',
+        login: this.login?.value ?? '',
+        senha: this.senha?.value ?? '',
+        role: this.role?.value ?? '',
+        alteraNextLogon: this.alteraNextLogon?.value ?? false,
+        endereco: this.endereco?.value ?? '',
+
+      }
+
+      this.userService.createUser(user).subscribe({
+        next: (resp) => {
+          showLoadingSuccess("Usuário cadastrado com sucesso",  reload)
+        },
+        error: (err) => {
+          console.error("Erro da Request: ", err)
+          let msg = ""
+          err.status == 409 ? msg = "Já existe um usuário com este login" : "Erro no cadastro do usuário"
+          
+          showLoadingError(msg)
+        }
+      })
+      
+    }
+  }
+
+  onClose(){
+    this.dialogRef.close()
+  }
+
 
   get nome (){
     return this.createForm.get('nome')
@@ -72,49 +120,6 @@ export class CreateUser {
 
   get alteraNextLogon(){
     return this.createForm.get('alteraNextLogon')
-  }
-
-  onSubmit(){
-
-    if (this.createForm.valid){
-
-      showLoading()
-
-      const user: UserDTO = {
-
-        nome: this.nome?.value ?? '',
-        sobrenome: this.sobrenome?.value ?? '',
-        nascimento: this.nascimento?.value ?? '',
-        telefone: this.telefone?.value ?? '',
-        email: this.email?.value ?? '',
-        login: this.login?.value ?? '',
-        senha: this.senha?.value ?? '',
-        role: this.role?.value ?? '',
-        alteraNextLogon: this.alteraNextLogon?.value ?? false,
-        endereco: this.endereco?.value ?? '',
-
-      }
-
-      this.userService.createUser(user).subscribe({
-        next: (resp) => {
-          showLoadingSuccess("Usuário cadastrado com sucesso")
-        },
-        error: (err) => {
-          console.error("Erro da Request: ", err)
-          let msg = ""
-          err.status == 409 ? msg = "Já existe um usuário com este login" : "Erro no cadastro do usuário"
-          
-          showLoadingError(msg)
-        }
-      })
-      
-    }
-  }
-
-
-  hide = true;
-  clickEvent() {
-    this.hide = !this.hide;
   }
 
 }

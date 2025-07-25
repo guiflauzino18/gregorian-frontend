@@ -79,6 +79,7 @@ export class Users implements AfterViewInit{
     maxWidth: '80vw',   // ou 'none'
     height: 'auto',
     width: 'auto',
+    disableClose: true,
     });
   }
 
@@ -89,6 +90,7 @@ export class Users implements AfterViewInit{
     height: 'auto',
     width: 'auto',
     data: user,
+    disableClose: true,
     });
   }
 

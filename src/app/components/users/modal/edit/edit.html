@@ -1,7 +1,7 @@
 <div class="w-full h-full flex flex-col justify-between">
     <h2 class="text-[var(--primary-gray)] px-5 py-2 text-xl">Cadastro de Usuário</h2>
     <mat-dialog-content class="h-full w-full">
-        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full h-full">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="flex flex-col w-full h-full gap-2">
 
             <div class="flex gap-10 w-full justify-between ">
 
@@ -122,15 +122,12 @@
             </div>
 
             <div class="flex gap-3 justify-end">
-               <input type="submit" value="Salvar" class="cursor-pointer">
-               <button matButton="">Cancelar</button>
-            </div>
+               <input type="submit" value="Salvar" class="button button-save">
+               <button type="button" (click)="onClose()" class="button button-cancel" >Cancelar</button>
+            </div> 
+
         </form>
     </mat-dialog-content>
-    <!-- <mat-dialog-actions>
-        <button matButton mat-dialog-close>Close</button>
-        <button>salvar</button>
-    </mat-dialog-actions> -->
 </div>
     
 

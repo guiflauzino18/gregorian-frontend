@@ -56,11 +56,27 @@ body { margin: 0;}
     color: white;
 }
 
+.button-save {
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+}
+
+.button-save:hover{
+    background-color: color-mix(in oklab, var(--primary-green) 10%, transparent);
+}
+
+.button-cancel{
+    border: 1px solid var(--secondary-gray);
+}
+
+.button-cancel:hover {
+    background-color: color-mix(in oklab, var(--primary-gray) 10%, transparent);
+
+}
 
 .form-invalid {
     color: var(--text-error)
 }
-
 
 .input-modal {
     background-color: white;
