@@ -12,7 +12,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialog} from '@angular/material/dialog';
 import { CreateUser } from './modal/create/create';
 import { EditUser } from './modal/edit/edit';
-import { hideLoading, showLoading, showLoadingError } from '../../../utils/popup';
+import { hideLoading, showConfirm, showLoading, showLoadingError, showLoadingSuccess } from '../../../utils/popup';
+import { reload } from '../../../utils/loader';
 
 @Component({
   selector: 'app-users',
@@ -32,7 +33,6 @@ export class Users implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort = new MatSort;
   readonly modalNewUser = inject(MatDialog);
   readonly modalEditUser = inject(MatDialog);
-
 
   constructor(){
     
@@ -94,7 +94,6 @@ export class Users implements AfterViewInit{
     });
   }
 
-
   edit(userId: number){
     showLoading()
 
@@ -110,4 +109,22 @@ export class Users implements AfterViewInit{
     })
   }
 
+  block(userId: number){
+    showConfirm({
+      title: "Deseja Prosseguir?",
+      callback: () => {
+        showLoading()
+        this.service.blockUser(userId).subscribe({
+          next: (resp) => {
+            showLoadingSuccess("Usuário atualizado.", reload)
+          },
+          error: (err) => {
+            const title: string = err.status == "404" ? "Usuário não encontrado" :  "Erro ao atualizar este usuário."
+            console.error(err)
+            showLoadingError(title, reload)
+          }
+        })
+      }
+    })
+  }
 }

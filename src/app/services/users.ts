@@ -44,8 +44,12 @@ export class UsersServices {
   }
 
   editUser(user: UserDTO){
-    console.log(user)
     const url = `${this.API_URL}/admin/user/edit`
     return this.http.put(url, user)
+  }
+
+  blockUser(userId: number){
+    const url = `${this.API_URL}/admin/user/block/${userId}`
+    return this.http.patch(url, null)
   }
 }
