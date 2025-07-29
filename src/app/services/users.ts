@@ -21,21 +21,24 @@ export class UsersServices {
     return this.http.get<UserDTO>(url, {params})
   }
 
-  getAllUsers(pageable?: Pageable<UserDTO>){
+  getAllUsers( input: string, pageable?: Pageable<UserDTO>){
+
+    let params = new HttpParams().set('input', input)
 
     // Para paginação
-    let params = pageable? new HttpParams()
-      .set('page', pageable.number)
-      .set('size', pageable.size) : new HttpParams();
+    if (pageable){
+      params = params.append('page', pageable.number)
+      params = params.append('size', pageable.size)
 
-    //Para ordenação
-    if (pageable?.sort.sortField && pageable.sort.sortDirection) {
-      console.log(`${pageable.sort.sortField},${pageable.sort.sortDirection}`)
-      params = params.set('sort', `${pageable.sort.sortField},${pageable.sort.sortDirection}`);
+      //Para ordenação
+      if (pageable.sort.sortField && pageable.sort.sortDirection) {
+        params = params.append('sort', `${pageable.sort.sortField},${pageable.sort.sortDirection}`);
+      }
     }
 
     const url = `${environment.apiUrl}/admin/user/list`
     return this.http.get<Pageable<UserDTO>>(url, {params});
+
   }
 
   createUser(user: UserDTO){
@@ -52,4 +55,5 @@ export class UsersServices {
     const url = `${this.API_URL}/admin/user/block/${userId}`
     return this.http.patch(url, null)
   }
+
 }

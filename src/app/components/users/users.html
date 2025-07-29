@@ -1,7 +1,12 @@
 <div class="mat-elevation-z8">
 
-  <div class="p-3">
+  <div class="p-3 flex gap-4">
     <button (click)="openModalNewUser()" class="button button-add">Novo Usuário</button>
+
+    <div class="border rounded-md flex items-center w-70">
+      <input type="text" class="h-full w-full p-2" (keyup)="searchUser()" [formControl]="search">
+      <i class="bx bx-search text-xl "></i>
+    </div>
   </div>
 
   @if (isLoadingResults || isRateLimitReached) {
@@ -21,27 +26,32 @@
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-      <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.nome}} </td>
     </ng-container>
 
     <ng-container matColumnDef="sobrenome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Sobrenome </th>
-      <td mat-cell *matCellDef="let row"> {{row.sobrenome}} </td>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.sobrenome}} </td>
     </ng-container>
 
     <ng-container matColumnDef="login">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Login </th>
-      <td mat-cell *matCellDef="let row"> {{row.login}} </td>
+      <td mat-cell *matCellDef="let row "class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.login}} </td>
     </ng-container>
 
     <ng-container matColumnDef="grupo">
       <th mat-header-cell *matHeaderCellDef > Grupo </th>
-      <td mat-cell *matCellDef="let row"> {{row.role}} </td>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.role}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef > Status </th>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'BLOQUEADO' ? 'text-red-500' : '' }} {{row.status == 'INATIVO' ? 'text-gray-400' : ''}}"> {{row.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="opcoes">
@@ -55,10 +65,13 @@
               <mat-icon>edit</mat-icon>
               <span>Editar</span>
             </button>
-            <button mat-menu-item (click)="block(row.id)">
-              <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
-              <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
-            </button>
+            @if(row.status != 'INATIVO'){
+
+              <button mat-menu-item (click)="block(row.id)">
+                <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
+                <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
+              </button>
+            }
           </mat-menu>
       </td>
     </ng-container>
@@ -74,9 +87,9 @@
 
   <mat-paginator 
     [pageSizeOptions]="[1, 5, 10, 25, 100]"
-    [pageSize]="pageable?.size"
-    [length]="pageable?.totalElements"
-    [pageIndex]="pageable?.number"
+    [pageSize]="pageable.size"
+    [length]="pageable.totalElements"
+    [pageIndex]="pageable.number"
     (page)="getAllusers($event)"
     aria-label="Select page of users" />
 </div>

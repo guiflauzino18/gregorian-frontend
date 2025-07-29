@@ -14,18 +14,38 @@ import { CreateUser } from './modal/create/create';
 import { EditUser } from './modal/edit/edit';
 import { hideLoading, showConfirm, showLoading, showLoadingError, showLoadingSuccess } from '../../../utils/popup';
 import { reload } from '../../../utils/loader';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users',
-  imports: [MatPaginator, MatTableModule, MatProgressSpinnerModule, MatSortModule, MatButtonModule, MatMenuModule, MatIconModule],
+  imports: [ReactiveFormsModule,MatPaginator, MatTableModule, MatProgressSpinnerModule, MatSortModule, MatButtonModule, MatMenuModule, MatIconModule],
   templateUrl: './users.html',
   styleUrl: './users.css'
 })
 export class Users implements AfterViewInit{
 
   private service = inject(UsersServices)
-  protected pageable: Pageable<UserDTO> | undefined;
-  columns: string[] = ['id', 'nome', 'sobrenome', 'login', 'grupo', 'opcoes'];
+  protected pageable: Pageable<UserDTO> = {
+    content: [],
+    empty: true,
+    first: true,
+    last: false,
+    number: 0,
+    numberOfElements: 0,
+    size: 10,
+    sort: {
+      empty: true,
+      sortDirection: "desc",
+      sorted: false,
+      sortField: "id",
+      unsorted: true
+    },
+    totalElements: 0,
+    totalPages: 0
+
+  }
+  columns: string[] = ['id', 'nome', 'sobrenome', 'login', 'grupo', 'status', 'opcoes'];
   dataSource: MatTableDataSource<UserDTO> | undefined;
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -33,6 +53,7 @@ export class Users implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort = new MatSort;
   readonly modalNewUser = inject(MatDialog);
   readonly modalEditUser = inject(MatDialog);
+  search = new FormControl('');
 
   constructor(){
     
@@ -50,17 +71,20 @@ export class Users implements AfterViewInit{
     //Inicia loading spinner
     this.isLoadingResults = !this.isLoadingResults;
 
+
     //Verifica se possui parametros para paginação ou sorted
     if (event){
-      this.pageable!.number = event?.pageIndex
-      this.pageable!.size = event?.pageSize
-      this.pageable!.sort.sortField = event.active
-      this.pageable!.sort.sortDirection = event.direction
+      this.pageable.number = event?.pageIndex
+      this.pageable.size = event?.pageSize
+      this.pageable.sort.sortField = event.active
+      this.pageable.sort.sortDirection = event.direction
 
     }
 
+    const input = this.search.value ? this.search.value : ''
+
     //chama serviço que faz request à API
-    this.service.getAllUsers(this.pageable).subscribe({
+    this.service.getAllUsers(input, this.pageable).subscribe({
       next: (res) => {
         this.pageable = res
         this.dataSource = new MatTableDataSource(this.pageable.content);
@@ -127,4 +151,33 @@ export class Users implements AfterViewInit{
       }
     })
   }
+
+  searchUser(){
+
+    const input = this.search.value
+
+    if(input && input.length! > 1){
+      this.getAllusers();
+    }
+
+    //   this.isLoadingResults = true;
+
+    //   this.service.search(input, this.pageable).subscribe({
+    //     next: (res) => {
+    //     this.pageable = res
+    //     this.dataSource = new MatTableDataSource(this.pageable.content);
+    //     this.isLoadingResults = false; //Fecha loading sppiner
+
+    //     },
+    //     error: (err) => {
+    //       console.error(err)
+    //     }
+    //   })
+    // }else {
+    //   this.getAllusers()
+    // }
+
+  }
+
+
 }
