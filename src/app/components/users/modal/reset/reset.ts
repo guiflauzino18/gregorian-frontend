@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { UserResetPassword } from '../../../../../interfaces/user';
 import { showLoading, showLoadingError, showLoadingSuccess } from '../../../../../utils/popup';
 import { UsersServices } from '../../../../services/users';
+import { reload } from '../../../../../utils/loader';
 
 @Component({
   selector: 'app-reset-user-password',
@@ -49,7 +50,7 @@ export class ResetUserPassword {
       this.service.resetPassword(body).subscribe({
         next: (resp) => {
           console.log(resp)
-          showLoadingSuccess("Senha resetada com sucesso.", this.onClose)
+          showLoadingSuccess("Senha resetada com sucesso.", reload)
         },
         error: (err) => {
           console.error(err)

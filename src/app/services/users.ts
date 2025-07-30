@@ -61,4 +61,9 @@ export class UsersServices {
     return this.http.put<ResponseDTO>(url, data)
   }
 
+  deleteUser(userId: number){
+    const url = `${this.API_URL}/admin/user/delete/${userId}`
+    return this.http.delete<ResponseDTO>(url)
+  }
+
 }

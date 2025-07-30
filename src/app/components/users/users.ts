@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, inject, numberAttribute, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { UsersServices } from '../../services/users';
 import { UserDTO } from '../../../interfaces/user';
-import {MatPaginator, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
-import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Pageable } from '../../../interfaces/pageable';
@@ -15,7 +15,6 @@ import { EditUser } from './modal/edit/edit';
 import { hideLoading, showConfirm, showLoading, showLoadingError, showLoadingSuccess } from '../../../utils/popup';
 import { reload } from '../../../utils/loader';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { ResetUserPassword } from './modal/reset/reset';
 
 @Component({
@@ -161,32 +160,35 @@ export class Users implements AfterViewInit{
   searchUser(){
 
     const input = this.search.value
-
-    if(input && input.length! > 1){
+    if(input){
       this.getAllusers();
     }
-
-    //   this.isLoadingResults = true;
-
-    //   this.service.search(input, this.pageable).subscribe({
-    //     next: (res) => {
-    //     this.pageable = res
-    //     this.dataSource = new MatTableDataSource(this.pageable.content);
-    //     this.isLoadingResults = false; //Fecha loading sppiner
-
-    //     },
-    //     error: (err) => {
-    //       console.error(err)
-    //     }
-    //   })
-    // }else {
-    //   this.getAllusers()
-    // }
-
   }
 
   resetPassword(userId: number){
     this.openModalResetPassword(userId)
+  }
+
+  delete(userId: number){
+    showConfirm({
+      title: "Deseja excluir este usuário?",
+      callback: () => {
+        showLoading()
+        this.service.deleteUser(userId).subscribe({
+          next: (resp) => {
+            showLoadingSuccess("Usuário deletado com sucesso", reload)
+          },
+          error: (err) => {
+            console.error(err)
+            showLoadingError("Erro ao deletar usuário")
+          }
+        })
+      }
+    })
+  }
+
+  tail(userId: number){
+
   }
 
 
