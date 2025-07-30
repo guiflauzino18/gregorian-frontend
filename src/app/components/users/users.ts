@@ -16,6 +16,7 @@ import { hideLoading, showConfirm, showLoading, showLoadingError, showLoadingSuc
 import { reload } from '../../../utils/loader';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { ResetUserPassword } from './modal/reset/reset';
 
 @Component({
   selector: 'app-users',
@@ -53,6 +54,7 @@ export class Users implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort = new MatSort;
   readonly modalNewUser = inject(MatDialog);
   readonly modalEditUser = inject(MatDialog);
+  readonly modalResetPassword = inject(MatDialog);
   search = new FormControl('');
 
   constructor(){
@@ -118,6 +120,10 @@ export class Users implements AfterViewInit{
     });
   }
 
+  openModalResetPassword(data: number){
+    this.modalResetPassword.open(ResetUserPassword, {data});
+  }
+
   edit(userId: number){
     showLoading()
 
@@ -177,6 +183,10 @@ export class Users implements AfterViewInit{
     //   this.getAllusers()
     // }
 
+  }
+
+  resetPassword(userId: number){
+    this.openModalResetPassword(userId)
   }
 
 

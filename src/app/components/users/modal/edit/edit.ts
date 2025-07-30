@@ -13,7 +13,7 @@ import { reload } from '../../../../../utils/loader';
 
 @Component({
   selector: 'app-edit-user',
-  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogContent, MatButtonModule, MatFormFieldModule, MatDialogActions],
+  imports: [ReactiveFormsModule, MatCheckboxModule, MatInputModule, MatIconModule, MatDialogContent, MatButtonModule, MatFormFieldModule],
   templateUrl: './edit.html',
   styleUrl: './edit.css'
 })

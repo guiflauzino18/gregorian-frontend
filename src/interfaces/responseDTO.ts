@@ -1,4 +1,4 @@
-export interface responseDTO {
+export interface ResponseDTO {
     title: string,
     body: string
 }

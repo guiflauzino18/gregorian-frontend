@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { UserDTO } from '../../interfaces/user';
+import { UserDTO, UserResetPassword } from '../../interfaces/user';
 import { Pageable } from '../../interfaces/pageable';
-import { config } from 'rxjs';
+import { ResponseDTO } from '../../interfaces/responseDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +54,11 @@ export class UsersServices {
   blockUser(userId: number){
     const url = `${this.API_URL}/admin/user/block/${userId}`
     return this.http.patch(url, null)
+  }
+
+  resetPassword(data: UserResetPassword){
+    const url = `${this.API_URL}/admin/user/resetsenha`
+    return this.http.put<ResponseDTO>(url, data)
   }
 
 }

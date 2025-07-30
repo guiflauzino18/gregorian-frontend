@@ -71,6 +71,10 @@
                 <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
                 <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
               </button>
+              <button mat-menu-item (click)="resetPassword(row.id)">
+                <mat-icon>password</mat-icon>
+                <span>Resetar Senha</span>
+              </button>
             }
           </mat-menu>
       </td>

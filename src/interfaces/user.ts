@@ -14,3 +14,9 @@ export interface UserDTO {
     dataRegistro?: string
     empresaNome?: string
 }
+
+export interface UserResetPassword {
+    id: number,
+    senha: string,
+    alteraNextLogon: boolean
+}

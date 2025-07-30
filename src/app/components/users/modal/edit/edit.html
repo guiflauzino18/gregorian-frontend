@@ -21,7 +21,7 @@
                 <div class="flex flex-col w-[100vw]">
                     <label for="sobrenome" class="relative top-3 -right-2 bg-white w-fit px-1">Sobrenome</label>
                     <input id="sobrenome" id="sobrenome" type="text" class="input-modal" formControlName="sobrenome" required=""/>
-                    @if(nome?.invalid){
+                    @if(sobrenome?.invalid){
                         <div class="form-invalid">
                             @if(sobrenome?.hasError('required')){
                                 <span>Sobrenome é obrigatório!</span>
