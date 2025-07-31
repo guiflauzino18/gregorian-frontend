@@ -11,8 +11,6 @@ import { ResponseDTO } from '../../interfaces/responseDTO';
 export class UsersServices {
 
   private API_URL = environment.apiUrl
-
-  
   private http = inject(HttpClient)
 
   getUserById(id: number){

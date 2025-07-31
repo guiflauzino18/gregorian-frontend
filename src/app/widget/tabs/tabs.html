@@ -1,8 +1,8 @@
-<mat-tab-group class="">
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="">
     @for(item of props(); track item){
-    <mat-tab>
-            <ng-template mat-tab-label>
-                <mat-icon class="example-tab-icon">{{item.icon}}</mat-icon>
+        <mat-tab>
+            <ng-template mat-tab-label class="">
+                <mat-icon class="m-2 text-gray-500">{{item.icon}}</mat-icon>
                 {{item.title}}
             </ng-template>
             
