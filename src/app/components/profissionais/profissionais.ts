@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateProfissional } from './modal/create/create';
 
 @Component({
   selector: 'app-profissionais',
@@ -45,6 +47,7 @@ export class Profissionais {
   protected search = new FormControl('');
   columns: string[] = ['id', 'nome', 'sobrenome', 'login', 'registro', 'agenda', 'status', 'opcoes'];
   dataSource: MatTableDataSource<ProfissionalDTO> | undefined;
+  readonly modalNewProfissional = inject(MatDialog)
 
   constructor(){
     this.getAllProfissionals()
@@ -52,7 +55,9 @@ export class Profissionais {
   }
 
   openModalNewProfissionals(){
-
+    this.modalNewProfissional.open(CreateProfissional, {
+      disableClose: true
+    })
   }
 
 
@@ -74,7 +79,6 @@ export class Profissionais {
     //chama serviço que faz request à API
     this.service.getAllProfissionals(input, this.pageable).subscribe({
       next: (res) => {
-        console.log(res)
         this.pageable = res
         this.dataSource = new MatTableDataSource(this.pageable.content);
         this.isLoadingResult = false; //Fecha loading sppiner

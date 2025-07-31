@@ -20,7 +20,7 @@
                 <div class="flex flex-col w-[100vw]">
                     <label for="sobrenome" class="relative top-3 -right-2 bg-white w-fit px-1">Sobrenome</label>
                     <input id="sobrenome" id="sobrenome" type="text" class="input-modal" formControlName="sobrenome" required=""/>
-                    @if(nome?.invalid){
+                    @if(sobrenome?.invalid){
                         <div class="form-invalid">
                             @if(sobrenome?.hasError('required')){
                                 <span>Sobrenome é obrigatório!</span>
@@ -131,32 +131,11 @@
                 </div>
             </div>
 
-            <div class="flex gap-3 justify-end">
+            <div class="flex gap-3 p-4 justify-end">
                <input type="submit" value="Salvar" class="button button-save">
                <button type="button" (click)="onClose()" class="button button-cancel">Cancelar</button>
             </div>
         </form>
     </mat-dialog-content>
-    <!-- <mat-dialog-actions>
-        <button matButton mat-dialog-close>Close</button>
-        <button>salvar</button>
-    </mat-dialog-actions> -->
-</div>
-    
 
-<!-- 
-    id?: number,
-    nome: string,
-    sobrenome: string,
-    nascimento: string,
-    telefone: string,
-    email: string,
-    login: string,
-    senha
-    role: string,
-    status: number
-    alteraNextLogon: boolean
-    dataRegistro: string
-    empresaNome: string
-    endereco: string,
--->
+</div>
