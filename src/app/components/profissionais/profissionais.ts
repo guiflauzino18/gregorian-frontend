@@ -14,6 +14,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateProfissional } from './modal/create/create';
+import { hideLoading, showConfirm, showLoading, showLoadingError, showLoadingSuccess } from '../../../utils/popup';
+import { reload } from '../../../utils/loader';
+import { EditProfissional } from './modal/edit/edit';
 
 @Component({
   selector: 'app-profissionais',
@@ -48,6 +51,7 @@ export class Profissionais {
   columns: string[] = ['id', 'nome', 'sobrenome', 'login', 'registro', 'agenda', 'status', 'opcoes'];
   dataSource: MatTableDataSource<ProfissionalDTO> | undefined;
   readonly modalNewProfissional = inject(MatDialog)
+  readonly modalEditProfissional = inject(MatDialog)
 
   constructor(){
     this.getAllProfissionals()
@@ -57,6 +61,12 @@ export class Profissionais {
   openModalNewProfissionals(){
     this.modalNewProfissional.open(CreateProfissional, {
       disableClose: true
+    })
+  }
+
+  openModalEditProfissional(profissional: ProfissionalDTO){
+    this.modalEditProfissional.open(EditProfissional, {
+      data: profissional
     })
   }
 
@@ -91,6 +101,62 @@ export class Profissionais {
   }
 
   edit(profissionalId: number){
+    showLoading()
+    this.service.getProfissionalById(profissionalId).subscribe({
+      next: (resp) => {
+        hideLoading()
+        this.openModalEditProfissional(resp)
+      }, 
+      error: (err) => {
+        console.error(err)
+        showLoadingError("Erro ao buscar dados do profissional", reload)
+      }
+    })
+  }
+
+  delete(profissionalId: number){
+    showConfirm({
+      title: "Excluir profssional?",
+      callback: () => {
+        this.service.deleteProfissional(profissionalId).subscribe({
+          next: (resp) => {
+            showLoadingSuccess("Profissional deletado", reload)
+          },
+          error: (err) => {
+            console.error(err)
+            let titulo: string
+            if (err.status == 404)
+              titulo = "Profissional não encontrado"
+            else if (err.status == 406)
+              titulo = "Profissional vinculado a uma agenda"
+            else titulo = "Erro ao deletado profissional"
+              showLoadingError(titulo)
+          }
+        })
+      }
+    })
+  }
+
+  block(profissionalId: number){
+    showConfirm({
+      title: "Bloquear Profissional?",
+      callback: () => {
+        showLoading()
+
+        this.service.blockProfissional(profissionalId).subscribe({
+          next: (resp) => {
+            showLoadingSuccess("Profissional atualizado", reload)
+
+          },
+          error: (err) => {
+            console.error(err)
+
+            showLoadingError("Erro ao atualizar profissional")
+          }
+        })
+      }
+    })
+
 
   }
 

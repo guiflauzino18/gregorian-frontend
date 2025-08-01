@@ -66,6 +66,16 @@
               <mat-icon>edit</mat-icon>
               <span>Editar</span>
             </button>
+            <button mat-menu-item (click)="delete(row.id)">
+              <mat-icon>delete_forever</mat-icon>
+              <span>Deletar</span>
+            </button>
+            @if(row.status != 'INATIVO'){
+              <button mat-menu-item (click)="block(row.id)">
+                <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
+                <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
+              </button>
+            }
           </mat-menu>
       </td>
     </ng-container>

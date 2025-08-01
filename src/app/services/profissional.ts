@@ -41,6 +41,26 @@ export class ProfissionalServices {
 
   }
 
+  getProfissionalById(id: number){
+    const url = `${this.API_URL}/admin/profissional/byid`
+    const params = new HttpParams().set('id', id);
 
+    return this.http.get<ProfissionalDTO>(url, {params})
+  }
+
+  editProfissional(profissional: ProfissionalDTO){
+    const url = `${this.API_URL}/admin/profissional/edit`
+    return this.http.put<ResponseDTO>(url, profissional)
+  }
+
+  deleteProfissional(id: number){
+    const url = `${this.API_URL}/admin/profissional/delete/${id}`
+    return this.http.delete<ResponseDTO>(url)
+  }
+
+  blockProfissional(id: number){
+    const url = `${this.API_URL}/admin/profissional/block/${id}`
+    return this.http.patch<ResponseDTO>(url, null)
+  }
 
 }

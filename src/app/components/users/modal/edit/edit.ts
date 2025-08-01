@@ -24,7 +24,8 @@ export class EditUser {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public user: UserDTO, 
-    private dialogRef: MatDialogRef<EditUser>) {
+    private dialogRef: MatDialogRef<EditUser>
+  ){
 
     this.editForm = new FormGroup({
       id: new FormControl(user.id, Validators.required),

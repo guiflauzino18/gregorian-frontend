@@ -34,9 +34,9 @@ export class CreateProfissional {
       showLoading()
 
       const profissional: ProfissionalDTO= {
-        titulo: this.titulo?.value ?? '',
-        registro: this.registro?.value ?? '',
-        login: this.login?.value ?? ''
+        titulo: this.titulo?.value?.trim() ?? '',
+        registro: this.registro?.value?.trim() ?? '',
+        login: this.login?.value?.trim() ?? ''
       }
 
       this.service.createProfissional(profissional).subscribe({

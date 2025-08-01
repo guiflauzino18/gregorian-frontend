@@ -9,6 +9,7 @@
   flex-direction: column;
   gap: .5rem;
   color: var(--text-white);
+  z-index: 2000;
 
 }
 
