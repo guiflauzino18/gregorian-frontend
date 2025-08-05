@@ -1,0 +1,62 @@
+<div class="w-full h-full flex flex-col justify-between">
+    <h2 class="text-[var(--primary-gray)] px-5 py-2 text-xl">Cadastro de Usuário</h2>
+    <mat-dialog-content class="h-full w-full">
+        <form [formGroup]="formReset" (ngSubmit)="onSubmit()" class="flex flex-col w-full h-full gap-2">
+
+            <div class="flex gap-10 w-full justify-between ">
+
+                <div class="flex-col w-[100vw] hidden">
+                    <label for="id" class="relative top-3 -right-2 bg-white w-fit px-1">Id</label>
+                    <input id="id" id="id" type="text" class="input-modal" formControlName="id" required=""/>
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="newPassword" class="relative top-3 -right-2 bg-white w-fit px-1">Nova senha</label>
+                    <input id="newPassword" id="newPassword" type="text" class="input-modal" formControlName="newPassword" required=""/>
+                    @if(newPassword?.invalid){
+                        <div class="form-invalid">
+                            @if(newPassword?.hasError('required')){
+                                <span>Insira a nova senha!</span>
+                            }
+                            @if(newPassword?.hasError('minlength')){
+                                <span>Mínimo de 6 caractéres.</span>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <div class="flex flex-col w-[100vw]">
+                    <label for="confirmPassword" class="relative top-3 -right-2 bg-white w-fit px-1">Confirme a senha</label>
+                    <input id="confirmPassword" id="confirmPassword" type="text" class="input-modal" formControlName="confirmPassword" required=""/>
+                    @if(formReset.invalid){
+                        <div class="form-invalid">
+                            @if(confirmPassword?.hasError('required')){
+                                <span>Confirme a nova senha.</span>
+                            }
+                            @if(confirmPassword?.hasError('minlength')){
+                                <span>Mínimo de 6 caractéres.</span>
+                            }
+                            @if(formReset.errors?.['passwordMismatch'] && confirmPassword?.valid){
+                                <span>Senhas não coincidem</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <div class="flex flex-row-reverse gap-2 justify-end">
+                    <label for="changePasswordOnNextLogon">Alterar senha no próximo Login</label>
+                    <input id="changePasswordOnNextLogon" type="checkbox" formControlName="alteraNextLogon">
+                </div>
+            </div>
+
+            <div class="flex gap-3 justify-end">
+               <input type="submit" value="Salvar" class="button button-save">
+               <button type="button" (click)="onClose()" class="button button-cancel" >Cancelar</button>
+            </div> 
+
+        </form>
+    </mat-dialog-content>
+</div>
+    

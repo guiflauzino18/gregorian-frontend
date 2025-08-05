@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { PageHeader, pageHeaderProps } from "../page-header/page-header";
 import { tabProps, Tabs } from "../../widget/tabs/tabs";
-import { Table } from '../../widget/table/table';
-import { Card } from '../card/card';
 import { Users } from '../users/users';
+import { Profissionais } from '../profissionais/profissionais';
 
 
 @Component({
@@ -37,6 +36,11 @@ export class Configuracao {
       title: 'Usuários',
       icon: 'contacts_product',
       content: Users
+    },
+    {
+      title: 'Profissional',
+      icon: 'medical_information',
+      content: Profissionais,
     },
   ]
 

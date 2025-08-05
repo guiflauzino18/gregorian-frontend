@@ -31,7 +31,7 @@ export class App{
     endereco: 'teste',
     login: 'teste',
     role: 'teste',
-    status: 0,
+    status: 'ATIVO',
     alteraNextLogon: false,
     dataRegistro: 'teste',
     empresaNome: 'teste'

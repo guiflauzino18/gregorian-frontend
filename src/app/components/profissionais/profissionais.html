@@ -1,28 +1,24 @@
+
 <div class="mat-elevation-z8">
 
   <div class="p-3 flex gap-4">
-    <button (click)="openModalNewUser()" class="button button-add">Novo Usuário</button>
+    <button (click)="openModalNewProfissionals()" class="button button-add">Novo Profissional</button>
 
     <div class="border border-[var(--primary-green)] text-[var(--primary-gray)] rounded-md flex items-center w-70">
-      <input type="text" class="h-full w-full p-2 focus:outline-none" (keyup)="searchUser()" [formControl]="search">
+      <input type="text" class="h-full w-full p-2 focus:outline-none" (keyup)="searchProfissional()" [formControl]="search">
       <i class="bx bx-search text-xl p-2 "></i>
     </div>
   </div>
 
-  @if (isLoadingResults || isRateLimitReached) {
+  @if (isLoadingResult) {
     <div class="table-loading-shade">
-      @if (isLoadingResults) {
+      @if (isLoadingResult) {
         <mat-spinner></mat-spinner>
-      }
-      @if (isRateLimitReached) {
-        <div class="example-rate-limit-reached">
-          GitHub's API rate limit has been reached. It will be reset in one minute.
-        </div>
       }
     </div>
   }
 
-  <table mat-table [dataSource]="dataSource!" matSort (matSortChange)="getAllusers($event)">
+  <table mat-table [dataSource]="dataSource!" matSort (matSortChange)="getAllProfissionals($event)">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
@@ -41,17 +37,22 @@
 
     <ng-container matColumnDef="login">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Login </th>
-      <td mat-cell *matCellDef="let row "class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.login}} </td>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.login}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="grupo">
-      <th mat-header-cell *matHeaderCellDef > Grupo </th>
-      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.role}} </td>
+    <ng-container matColumnDef="registro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Registro </th>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.registro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="agenda">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Agenda </th>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.agenda}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef > Status </th>
-      <td mat-cell *matCellDef="let row" class="{{row.status == 'BLOQUEADO' ? 'text-red-500' : '' }} {{row.status == 'INATIVO' ? 'text-gray-400' : ''}} {{row.status == 'ATIVO' ? 'text-green-700' : ''}}"> {{row.status}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row" class="{{row.status == 'INATIVO' ? 'text-gray-400' : '' }}"> {{row.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="opcoes">
@@ -65,31 +66,22 @@
               <mat-icon>edit</mat-icon>
               <span>Editar</span>
             </button>
-            @if(row.status != 'INATIVO'){
-
-              <button mat-menu-item (click)="block(row.id)">
-                <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
-                <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
-              </button>
-              <button mat-menu-item (click)="resetPassword(row.id)">
-                <mat-icon>password</mat-icon>
-                <span>Resetar Senha</span>
-              </button>
-            }
             <button mat-menu-item (click)="delete(row.id)">
               <mat-icon>delete_forever</mat-icon>
               <span>Deletar</span>
             </button>
-            <button mat-menu-item (click)="tail(row.id)">
-              <mat-icon>fingerprint</mat-icon>
-              <span>Rastro</span>
-            </button>
+            @if(row.status != 'INATIVO'){
+              <button mat-menu-item (click)="block(row.id)">
+                <mat-icon>{{row.status != 'BLOQUEADO' ? "lock_person" : "lock_open_right"}}</mat-icon>
+                <span>{{row.status != 'BLOQUEADO' ? "Bloquear" : "Desbloquear"}}</span>
+              </button>
+            }
           </mat-menu>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    <tr mat-row matRipple *matRowDef="let row; columns: columns;"></tr>
 
 
     <tr class="mat-row" *matNoDataRow>
@@ -102,6 +94,6 @@
     [pageSize]="pageable.size"
     [length]="pageable.totalElements"
     [pageIndex]="pageable.number"
-    (page)="getAllusers($event)"
-    aria-label="Select page of users" />
+    (page)="getAllProfissionals($event)"
+    aria-label="Select page of profissionals" />
 </div>

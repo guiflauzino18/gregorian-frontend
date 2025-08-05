@@ -60,80 +60,6 @@ export class Home implements OnInit {
       icone: 'bx bxs-cog',
       link: '/configuracao'
     },
-
-
-    // {
-    //   titulo: 'Atendimento',
-    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
-    //   icone: 'bx bxs-user-account',
-    //   link: '/atendimento'
-    // },
-    // {
-    //   titulo: 'Agendamento',
-    //   desc: 'Gerencie agendamentos .',
-    //   icone: 'bx bxs-calendar',
-    //   link: '/agendamento'
-    // },
-    // {
-    //   titulo: 'Faturamento',
-    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
-    //   icone: 'bx bxs-badge-dollar',
-    //   link: '/faturamento'
-    // },
-    // {
-    //   titulo: 'Configuração',
-    //   desc: 'Defina configurações para o funcionamento do sistema',
-    //   icone: 'bx bxs-cog',
-    //   link: '/configuracao'
-    // },
-    // {
-    //   titulo: 'Atendimento',
-    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
-    //   icone: 'bx bxs-user-account',
-    //   link: '/atendimento'
-    // },
-    // {
-    //   titulo: 'Agendamento',
-    //   desc: 'Gerencie agendamentos .',
-    //   icone: 'bx bxs-calendar',
-    //   link: '/agendamento'
-    // },
-    // {
-    //   titulo: 'Faturamento',
-    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
-    //   icone: 'bx bxs-badge-dollar',
-    //   link: '/faturamento'
-    // },
-    // {
-    //   titulo: 'Configuração',
-    //   desc: 'Defina configurações para o funcionamento do sistema',
-    //   icone: 'bx bxs-cog',
-    //   link: '/configuracao'
-    // },
-    // {
-    //   titulo: 'Atendimento',
-    //   desc: 'Gerencie atendimento, cadastre e edite paciente.',
-    //   icone: 'bx bxs-user-account',
-    //   link: '/atendimento'
-    // },
-    // {
-    //   titulo: 'Agendamento',
-    //   desc: 'Gerencie agendamentos .',
-    //   icone: 'bx bxs-calendar',
-    //   link: '/agendamento'
-    // },
-    // {
-    //   titulo: 'Faturamento',
-    //   desc: 'Gerencie faturamentos, gere, cancele ou edite faturamentos.',
-    //   icone: 'bx bxs-badge-dollar',
-    //   link: '/faturamento'
-    // },
-    // {
-    //   titulo: 'Configuração',
-    //   desc: 'Defina configurações para o funcionamento do sistema',
-    //   icone: 'bx bxs-cog',
-    //   link: '/configuracao'
-    // },
   ]
   
   logout(p: boolean){
@@ -143,7 +69,6 @@ export class Home implements OnInit {
         icon: 'warning',
         callback: () => this.authService.logout()
       })
-      //this.authService.logout()
     }
   }
 
