@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.seusistema.com/api'
+  apiUrl: 'https://api.gregorian.com/api'
 };

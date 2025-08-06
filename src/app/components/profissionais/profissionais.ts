@@ -145,7 +145,7 @@ export class Profissionais {
 
         this.service.blockProfissional(profissionalId).subscribe({
           next: (resp) => {
-            showLoadingSuccess("Profissional atualizado", reload)
+            showLoadingSuccess("Profissional atualizado", () => {this.getAllProfissionals()})
 
           },
           error: (err) => {
